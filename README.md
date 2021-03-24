@@ -19,6 +19,7 @@ CS 336 - Principles of Information and Data Management Final Project
  - In the `Project Explorer` locate `CS336_Group_55 -> Java Resources -> src -> com.cs336.pkg -> ApplicationDB.java'
   - Change `line 16` to appropriate URL and Port
   - Change `line 34` to appropriate username and password
+- May have to re-add Tomcat Server `Window -> Preferences -> Server -> Runtime Enviroment -> Add...`
 - Right Click `CS336_Group_55` `Run As -> Run On Server -> Finish`
 
 # Notes
