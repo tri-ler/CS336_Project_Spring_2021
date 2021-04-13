@@ -1,18 +1,22 @@
 # CS336_Project_Spring_2021
 CS 336 - Principles of Information and Data Management Final Project
 
-# Install
+# How to work git and github
+
+
+## Setup
+### Install
 - Apache Tomcat 7
 - Eclipse
 - JRE
 
-# SQL Setup
+### SQL Setup
 - Clone the repository
 - Open MySQL Workbench
   - `File -> Open SQLScript` Find `createDatabase.sql`
   - Click the lightning bolt to run the script and create the database if not already created
 
-# Eclipse Setup
+### Eclipse Setup
 - In Eclipse, `File -> Import -> General -> Existing Projects into Workspace`
   - Select `CS336_Group_55`
   - Repeat Process for `Servers`
