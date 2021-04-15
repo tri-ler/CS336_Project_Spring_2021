@@ -1,6 +1,0 @@
-INDEX VERSION 1.4+C:\Users\bryan\Documents\School\Databases\CS336_Project_Spring_2021\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2444780660.index
-1095498771.index
-3419869636.index
-970921032.index
-4246840434.index
