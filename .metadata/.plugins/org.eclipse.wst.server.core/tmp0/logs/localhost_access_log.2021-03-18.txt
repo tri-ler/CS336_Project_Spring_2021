@@ -1,4 +1,0 @@
-127.0.0.1 - - [18/Mar/2021:16:20:09 -0400] "GET / HTTP/1.1" 404 748
-0:0:0:0:0:0:0:1 - - [18/Mar/2021:16:20:11 -0400] "GET /cs336Sample/ HTTP/1.1" 200 1182
-0:0:0:0:0:0:0:1 - - [18/Mar/2021:16:20:42 -0400] "GET /cs336Sample/login.jsp?username=admin1&password=admin1 HTTP/1.1" 200 457
-0:0:0:0:0:0:0:1 - - [18/Mar/2021:16:29:25 -0400] "GET /cs336Sample/login.jsp?username=admin1&password=admin1 HTTP/1.1" 404 736
