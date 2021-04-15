@@ -13,10 +13,12 @@ public class ApplicationDB {
 
 	public Connection getConnection(){
 		String password = "blank";
+		String username = "usdf";
 	    try(FileReader reader =  new FileReader("config")) {
 	        Properties properties = new Properties();
 	        properties.load(reader);
 	        password = properties.getProperty("password");
+	        username = properties.getProperty("username");
 	    }catch (Exception e) {;
 	       e.printStackTrace();
 	    }
@@ -40,7 +42,7 @@ public class ApplicationDB {
 		}
 		try {
 			//Create a connection to your DB
-			connection = DriverManager.getConnection(connectionUrl,"root", password);
+			connection = DriverManager.getConnection(connectionUrl,username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
