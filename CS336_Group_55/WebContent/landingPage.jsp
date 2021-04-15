@@ -8,6 +8,7 @@
 </head>
 <body>
 	out.print("Testing branch stuff");
+	out.print("Testing branch stuff2");
 	<br>
 		<form method="get" action="login.jsp">
 			<table>
