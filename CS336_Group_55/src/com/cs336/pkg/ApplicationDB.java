@@ -30,7 +30,7 @@ public class ApplicationDB {
 		}
 		try {
 			//Create a connection to your DB
-			connection = DriverManager.getConnection(connectionUrl,"root", "mysPenguins#234");
+			connection = DriverManager.getConnection(connectionUrl,"root", "s#234");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
