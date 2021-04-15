@@ -7,6 +7,7 @@
 <title>Login Page</title>
 </head>
 <body>
+	out.print("Testing branch stuff");
 	<br>
 		<form method="get" action="login.jsp">
 			<table>
