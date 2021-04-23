@@ -8,6 +8,6 @@
 </head>
 <body>
 	<p> You have successfully logged in <p>
-	<a href="userStart.jsp">Continue to userStart.jsp to view bids n shit)</a>
+	<a href="userStart.jsp">Continue to userStart.jsp to view bids n shit</a>
 </body>
 </html>
