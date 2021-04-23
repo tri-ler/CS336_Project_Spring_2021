@@ -2,6 +2,21 @@
 CS 336 - Principles of Information and Data Management Final Project
 
 # How to work git and github
+- First time
+  - create file called `config` in same level as `ApplicationDB.java` so we can have different passwords
+    - right-click `com.cs336.pkg->New->Other->General->File`
+    - type `password=<your sql password> (ex: password)`
+    - type `username=<your sql username> (ex: root)`
+- ALWAYS DO THESE WHENEVER YOU START WORKING
+  - open a terminal (ex: right-click `CS336_Group_55`and click `Show in Local Terminal`)
+  - `git checkout main`
+  - `git pull`
+  - `git checkout <your branch>` (ex: `git checkout Tyler`)
+  - `git merge main`
+- Saving work
+  - `git add .`
+  - `git commit -m "<appropriate message> (ex: finished userStart.jsp)"
+  - `git push`
 
 
 ## Setup
