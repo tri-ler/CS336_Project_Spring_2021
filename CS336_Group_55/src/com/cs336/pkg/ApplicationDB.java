@@ -1,4 +1,6 @@
 package com.cs336.pkg;
+import java.io.FileReader;
+import java.util.Properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +12,16 @@ public class ApplicationDB {
 	}
 
 	public Connection getConnection(){
+		String password = "password";
+		String username = "root";
+	    try(FileReader reader =  new FileReader("config")) {
+	        Properties properties = new Properties();
+	        properties.load(reader);
+	        password = properties.getProperty("password");
+	        username = properties.getProperty("username");
+	    }catch (Exception e) {;
+	       e.printStackTrace();
+	    }
 		
 		//Create a connection string
 		String connectionUrl = "jdbc:mysql://localhost:3306/cs336project?useSSL=false";
@@ -30,7 +42,7 @@ public class ApplicationDB {
 		}
 		try {
 			//Create a connection to your DB
-			connection = DriverManager.getConnection(connectionUrl,"root", "mysPenguins#234");
+			connection = DriverManager.getConnection(connectionUrl,username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,9 +60,6 @@ public class ApplicationDB {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 	
 	
 	public static void main(String[] args) {
