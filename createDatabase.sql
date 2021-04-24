@@ -16,6 +16,43 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `users`
+--
+use cs336project;
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('',''),('user1','user1');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `auction`;
+CREATE TABLE `auction`(
+	`auctionID` int NOT NULL,
+    `seller` varchar(45) NOT NULL,
+    `startTime` time NOT NULL,
+    `startDate` date NOT NULL,
+    `minIncrement` float NOT NULL,
+    `currentPrice` float NOT NULL,
+    `initialPrice` float NOT NULL,
+    `secretMin` float NOT NULL,
+    PRIMARY KEY (`auctionID`)
+    );
+
+--
 -- Table structure for table `bids`
 --
 
@@ -23,16 +60,69 @@ DROP TABLE IF EXISTS `bids`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bids` (
-  `IDItem` int NOT NULL,
-  `IDBID` int NOT NULL,
-  `bidDate` date DEFAULT NULL,
-  `user` varchar(45) DEFAULT NULL,
-  `isWinning` tinyint DEFAULT NULL,
+  `bidID` int NOT NULL,
+  `auctionID` int NOT NULL,
+  `seller` varchar(45) NOT NULL,
+  `date` date DEFAULT NULL, 
+  `time` time DEFAULT NULL,
   `bidAmount` float DEFAULT NULL,
-  PRIMARY KEY (`IDItem`,`IDBID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `username` varchar(45) NOT NULL,
+  PRIMARY KEY (`bidID`),
+  FOREIGN KEY (`username`) references users(`username`),
+  FOREIGN KEY (`auctionID`) references auction(`auctionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+
+DROP TABLE IF EXISTS `selling`;
+
+
+DROP TABLE IF EXISTS `auctioning`;
+CREATE TABLE `auctioning`(
+	`itemID` int NOT NULL,
+    `auctionID` int NOT NULL,
+    PRIMARY KEY (`auctionID`,`itemID`),
+    FOREIGN KEY (`auctionID`) REFERENCES auction(auctionID),
+    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    
+DROP TABLE IF EXISTS `computerPart`;
+CREATE TABLE `computerPart`(
+	`partName` varchar(45) NOT NULL,
+    `itemID` int NOT NULL,
+    PRIMARY KEY (`itemID`)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    
+DROP TABLE IF EXISTS `CPU`;
+CREATE TABLE `CPU`(
+    `itemID` int NOT NULL,
+    `brand` varchar(45) NOT NULL,
+    `model` varchar(45) NOT NULL,
+    `color` varchar(45) NOT NULL,
+    `frequency` varchar(45) NOT NULL,
+    PRIMARY KEY (`itemID`),
+    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `graphicsCard`;
+CREATE TABLE `graphicsCard`(
+    `itemID` int NOT NULL,
+    `brand` varchar(45) NOT NULL,
+    `model` varchar(45) NOT NULL,
+    `color` varchar(45) NOT NULL,
+    PRIMARY KEY (`itemID`),
+    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `hardDrive`;
+CREATE TABLE `hardDrive`(
+    `itemID` int NOT NULL,
+    `brand` varchar(45) NOT NULL,
+    `model` varchar(45) NOT NULL,
+    `color` varchar(45) NOT NULL,
+    `capacity` varchar(45) NOT NULL,
+    PRIMARY KEY (`itemID`),
+    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 --
 -- Dumping data for table `bids`
 --
@@ -42,41 +132,6 @@ LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `items`
---
-
-DROP TABLE IF EXISTS `items`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `items` (
-  `IDItem` int NOT NULL,
-  `nameItem` varchar(45) DEFAULT NULL,
-  `userCreated` varchar(45) DEFAULT NULL,
-  `att1Name` varchar(45) DEFAULT NULL,
-  `att1Description` varchar(45) DEFAULT NULL,
-  `att2Name` varchar(45) DEFAULT NULL,
-  `att2Description` varchar(45) DEFAULT NULL,
-  `att3Name` varchar(45) DEFAULT NULL,
-  `att3Description` varchar(45) DEFAULT NULL,
-  `att4Name` varchar(45) DEFAULT NULL,
-  `att4Description` varchar(45) DEFAULT NULL,
-  `highestBidder` varchar(45) DEFAULT NULL,
-  `currentPrice` float DEFAULT NULL,
-  `startDate` date DEFAULT NULL,
-  `endDate` date DEFAULT NULL,
-  PRIMARY KEY (`IDItem`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `items`
---
-
-LOCK TABLES `items` WRITE;
-/*!40000 ALTER TABLE `items` DISABLE KEYS */;
-/*!40000 ALTER TABLE `items` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `representatives`
@@ -102,29 +157,7 @@ INSERT INTO `representatives` VALUES ('admin','admin'),('rep1','rep1');
 /*!40000 ALTER TABLE `representatives` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `users`
---
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('',''),('user1','user1');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
