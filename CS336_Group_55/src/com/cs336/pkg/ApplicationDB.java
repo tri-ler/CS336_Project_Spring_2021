@@ -14,14 +14,14 @@ public class ApplicationDB {
 	public Connection getConnection(){
 		String password = "password";
 		String username = "root";
-	    try(FileReader reader =  new FileReader("config")) {
-	        Properties properties = new Properties();
-	        properties.load(reader);
-	        password = properties.getProperty("password");
-	        username = properties.getProperty("username");
-	    }catch (Exception e) {;
-	       e.printStackTrace();
-	    }
+//	    try(FileReader reader =  new FileReader("config")) {
+//	        Properties properties = new Properties();
+//	        properties.load(reader);
+//	        password = properties.getProperty("password");
+//	        username = properties.getProperty("username");
+//	    }catch (Exception e) {;
+//	       e.printStackTrace();
+//	    }
 		
 		//Create a connection string
 		String connectionUrl = "jdbc:mysql://localhost:3306/cs336project?useSSL=false";
