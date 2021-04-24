@@ -33,7 +33,19 @@
 				</tr>
 				<tr>
 					<td>frequency</td><td><input type="text" name="frequency" placeholder = "3.4Ghz"></td>
-				</tr>			
+				</tr>
+				<tr>
+					<td>seller username</td><td><input type="text" name="seller" placeholder = "user1"></td>
+				</tr>
+				<tr>
+					<td>minimum increment</td><td><input type="text" name="minIncrement" placeholder = "1"></td>
+				</tr>
+				<tr>
+					<td>starting price</td><td><input type="text" name="initialPrice" placeholder = "5"></td>
+				</tr>	
+				<tr>
+					<td>reserve</td><td><input type="text" name="reserve" placeholder = "10"></td>
+				</tr>		
 			</table>
 			<input type="submit" value="Create New CPU Listing">
 		</form>

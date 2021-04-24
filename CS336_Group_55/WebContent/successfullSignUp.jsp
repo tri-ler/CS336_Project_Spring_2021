@@ -7,7 +7,7 @@
 <title>Successful Sign In</title>
 </head>
 <body>
-	<p>You have successfully signed in<p>
+	<p>You have successfully SIGNED UP<p>
 	<a href="landingPage.jsp">return</a>
 </body>
 </html>
