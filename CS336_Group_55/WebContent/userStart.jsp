@@ -29,35 +29,20 @@
 		<form method="get" action="newListing.jsp">
 			<table>
 				<tr>    
-					<td>Username</td><td><input type="text" name="username"></td>
+					<td>start date</td><td><input type="date" name="startDate" placeholder = "YYYY-MM-DD"></td>
 				</tr>
 				<tr>
-					<td>Password</td><td><input type="text" name="password"></td>
-				</tr>
-			</table>
-			<input type="submit" value="Login">
-		</form>
-	<br>
-	<br>
-		<form method="get" action="signup.jsp">
-			<table>
-				<tr>    
-					<td>Username</td><td><input type="text" name="newUsername"></td>
+					<td>start time</td><td><input type="time" name="startTime" placeholder = "HH:MM:SS"></td>
 				</tr>
 				<tr>
-					<td>Password</td><td><input type="text" name="newPassword"></td>
+					<td>name item</td><td><input type="text" name="nameItem" placeholder = "ex: drugs"></td>
 				</tr>
-			</table>
-			<input type="submit" value="signup">
+				<tr>
+					<td>starting price</td><td><input type="number" step="0.01" name="currentPrice" placeholder = "10.01"></td>
+				</tr>			</table>
+			<input type="submit" value="newListing">
 		</form>
 	<br>
-	<br>
-		<form action="/abc.jsp">
-      	Birthday:
-      	<input type="datetime-local" id="birthdaytime" name="birthdaytime">
-      	<input type="submit">
-    </form>
-	<br>
-	<button onclick="window.location='representativeLoginPage.jsp';"> Representative Login Page </button>
+
 </body>
 </html>

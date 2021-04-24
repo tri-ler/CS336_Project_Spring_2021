@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<%
 	try {
 		
@@ -65,5 +66,6 @@
 		response.sendRedirect("failedSignUp.jsp");
 	}
 %>
+
 </body>
 </html>
