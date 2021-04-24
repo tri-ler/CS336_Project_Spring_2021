@@ -16,44 +16,64 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `auction`
 --
-use cs336project;
-DROP TABLE IF EXISTS `users`;
+
+DROP TABLE IF EXISTS `auction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`username`)
+CREATE TABLE `auction` (
+  `auctionID` int NOT NULL AUTO_INCREMENT,
+  `seller` varchar(45) NOT NULL,
+  `startTime` time NOT NULL,
+  `startDate` date NOT NULL,
+  `endTime` time NOT NULL,
+  `endDate` date NOT NULL,
+  `minIncrement` float NOT NULL,
+  `currentPrice` float NOT NULL,
+  `initialPrice` float NOT NULL,
+  `winner` varchar(45) DEFAULT NULL,
+  `secretMin` float NOT NULL,
+  PRIMARY KEY (`auctionID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auction`
+--
+
+LOCK TABLES `auction` WRITE;
+/*!40000 ALTER TABLE `auction` DISABLE KEYS */;
+INSERT INTO `auction` VALUES (1,'user1','08:00:00','2021-04-23','09:00:00','2021-04-26',1,5,5,NULL,10),(2,'user2','09:00:00','2021-04-24','09:00:00','2021-04-26',1,5,5,NULL,10),(3,'user3','20:00:00','2021-04-24','09:00:00','2021-04-26',1,5,5,NULL,10),(4,'user4','10:00:00','2021-04-25','10:10:00','2021-04-27',5,0,0,NULL,50),(5,'user5','11:00:00','2021-04-27','12:00:00','2021-04-30',1,10,4,NULL,20);
+/*!40000 ALTER TABLE `auction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auctioning`
+--
+
+DROP TABLE IF EXISTS `auctioning`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auctioning` (
+  `itemID` int NOT NULL,
+  `auctionID` int NOT NULL,
+  PRIMARY KEY (`auctionID`,`itemID`),
+  KEY `itemID` (`itemID`),
+  CONSTRAINT `auctioning_ibfk_1` FOREIGN KEY (`auctionID`) REFERENCES `auction` (`auctionID`),
+  CONSTRAINT `auctioning_ibfk_2` FOREIGN KEY (`itemID`) REFERENCES `computerpart` (`itemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `auctioning`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('user1','user1');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `auctioning` WRITE;
+/*!40000 ALTER TABLE `auctioning` DISABLE KEYS */;
+INSERT INTO `auctioning` VALUES (6,1),(7,2),(8,3),(9,4),(10,5);
+/*!40000 ALTER TABLE `auctioning` ENABLE KEYS */;
 UNLOCK TABLES;
-
-DROP TABLE IF EXISTS `auction`;
-CREATE TABLE `auction`(
-	`auctionID` int NOT NULL auto_increment,
-    `seller` varchar(45) NOT NULL,
-    `startTime` time NOT NULL,
-    `startDate` date NOT NULL,    
-    `endTime` time NOT NULL,
-    `endDate` date NOT NULL,
-    `minIncrement` float NOT NULL,
-    `currentPrice` float NOT NULL,
-    `initialPrice` float NOT NULL,
-    `winner` varchar(45),
-    `secretMin` float NOT NULL,
-    PRIMARY KEY (`auctionID`)
-    );
 
 --
 -- Table structure for table `bids`
@@ -63,79 +83,136 @@ DROP TABLE IF EXISTS `bids`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bids` (
-  `bidID` int NOT NULL auto_increment, 
+  `bidID` int NOT NULL AUTO_INCREMENT,
   `auctionID` int NOT NULL,
   `seller` varchar(45) NOT NULL,
-  `date` date DEFAULT NULL, 
+  `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   `bidAmount` float DEFAULT NULL,
   `username` varchar(45) NOT NULL,
-  `isAuto` boolean NOT NULL,
+  `isAuto` tinyint(1) NOT NULL,
   PRIMARY KEY (`bidID`),
-  FOREIGN KEY (`username`) references users(`username`),
-  FOREIGN KEY (`auctionID`) references auction(`auctionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `username` (`username`),
+  KEY `auctionID` (`auctionID`),
+  CONSTRAINT `bids_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
+  CONSTRAINT `bids_ibfk_2` FOREIGN KEY (`auctionID`) REFERENCES `auction` (`auctionID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-
-
-DROP TABLE IF EXISTS `selling`;
-
-
-DROP TABLE IF EXISTS `auctioning`;
-CREATE TABLE `auctioning`(
-	`itemID` int NOT NULL,
-    `auctionID` int NOT NULL,
-    PRIMARY KEY (`auctionID`,`itemID`),
-    FOREIGN KEY (`auctionID`) REFERENCES auction(auctionID),
-    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-    
-DROP TABLE IF EXISTS `computerPart`;
-CREATE TABLE `computerPart`(
-	`partName` varchar(45) NOT NULL,
-    `itemID` int NOT NULL auto_increment,
-    PRIMARY KEY (`itemID`)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-    
-DROP TABLE IF EXISTS `CPU`;
-CREATE TABLE `CPU`(
-    `itemID` int NOT NULL,
-    `brand` varchar(45) NOT NULL,
-    `model` varchar(45) NOT NULL,
-    `socket` varchar(45) NOT NULL,
-    `frequency` varchar(45) NOT NULL,
-    PRIMARY KEY (`itemID`),
-    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-DROP TABLE IF EXISTS `graphicsCard`;
-CREATE TABLE `graphicsCard`(
-    `itemID` int NOT NULL,
-    `brand` varchar(45) NOT NULL,
-    `model` varchar(45) NOT NULL,
-    `color` varchar(45) NOT NULL,
-    PRIMARY KEY (`itemID`),
-    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-DROP TABLE IF EXISTS `hardDrive`;
-CREATE TABLE `hardDrive`(
-    `itemID` int NOT NULL,
-    `brand` varchar(45) NOT NULL,
-    `model` varchar(45) NOT NULL,
-    `color` varchar(45) NOT NULL,
-    `capacity` varchar(45) NOT NULL,
-    PRIMARY KEY (`itemID`),
-    FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
-    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 --
 -- Dumping data for table `bids`
 --
 
 LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` DISABLE KEYS */;
+INSERT INTO `bids` VALUES (1,1,'user1','2021-04-24','01:00:00',10,'user5',0),(2,2,'user2','2021-04-24','02:00:00',10,'user4',0),(3,3,'user3','2021-04-24','03:00:00',10,'user3',0),(4,4,'user4','2021-04-24','04:00:00',1,'user2',0),(5,5,'user5','2021-04-24','05:00:00',10,'user1',0),(6,5,'user5','2021-04-24','06:00:00',15,'user2',0),(7,4,'user4','2021-04-24','07:00:00',15,'user3',0),(8,3,'user3','2021-04-24','08:00:00',15,'user4',0),(9,2,'user2','2021-04-24','09:00:00',20,'user5',0),(10,1,'user1','2021-04-24','10:00:00',30,'user1',0);
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Table structure for table `computerpart`
+--
+
+DROP TABLE IF EXISTS `computerpart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `computerpart` (
+  `partName` varchar(45) NOT NULL,
+  `itemID` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`itemID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `computerpart`
+--
+
+LOCK TABLES `computerpart` WRITE;
+/*!40000 ALTER TABLE `computerpart` DISABLE KEYS */;
+INSERT INTO `computerpart` VALUES ('Intel i7-6700',1),('Amd Ryzen 3600',2),('Intel i9-10900',3);
+/*!40000 ALTER TABLE `computerpart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cpu`
+--
+
+DROP TABLE IF EXISTS `cpu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cpu` (
+  `itemID` int NOT NULL,
+  `brand` varchar(45) NOT NULL,
+  `model` varchar(45) NOT NULL,
+  `socket` varchar(45) NOT NULL,
+  `frequency` varchar(45) NOT NULL,
+  PRIMARY KEY (`itemID`),
+  CONSTRAINT `cpu_ibfk_1` FOREIGN KEY (`itemID`) REFERENCES `computerpart` (`itemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cpu`
+--
+
+LOCK TABLES `cpu` WRITE;
+/*!40000 ALTER TABLE `cpu` DISABLE KEYS */;
+INSERT INTO `cpu` VALUES (1,'intel','i7-6700','LGA2011','3.4 GHz'),(2,'amd','ryzen 3600','am4','4.0 GHz'),(3,'intel','i9-10900','LGA2011','5.0Ghz');
+/*!40000 ALTER TABLE `cpu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `graphicscard`
+--
+
+DROP TABLE IF EXISTS `graphicscard`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `graphicscard` (
+  `itemID` int NOT NULL,
+  `brand` varchar(45) NOT NULL,
+  `model` varchar(45) NOT NULL,
+  `color` varchar(45) NOT NULL,
+  PRIMARY KEY (`itemID`),
+  CONSTRAINT `graphicscard_ibfk_1` FOREIGN KEY (`itemID`) REFERENCES `computerpart` (`itemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `graphicscard`
+--
+
+LOCK TABLES `graphicscard` WRITE;
+/*!40000 ALTER TABLE `graphicscard` DISABLE KEYS */;
+/*!40000 ALTER TABLE `graphicscard` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `harddrive`
+--
+
+DROP TABLE IF EXISTS `harddrive`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `harddrive` (
+  `itemID` int NOT NULL,
+  `brand` varchar(45) NOT NULL,
+  `model` varchar(45) NOT NULL,
+  `color` varchar(45) NOT NULL,
+  `capacity` varchar(45) NOT NULL,
+  PRIMARY KEY (`itemID`),
+  CONSTRAINT `harddrive_ibfk_1` FOREIGN KEY (`itemID`) REFERENCES `computerpart` (`itemID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `harddrive`
+--
+
+LOCK TABLES `harddrive` WRITE;
+/*!40000 ALTER TABLE `harddrive` DISABLE KEYS */;
+/*!40000 ALTER TABLE `harddrive` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `representatives`
@@ -161,7 +238,29 @@ INSERT INTO `representatives` VALUES ('admin','admin'),('rep1','rep1');
 /*!40000 ALTER TABLE `representatives` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Table structure for table `users`
+--
 
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('user1','user1'),('user2','user2'),('user3','user3'),('user4','user4'),('user5','user5');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -172,11 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-13 11:42:08
-
-use cs336project;
-
-insert into auction (seller, startTime,startDate,endTime,endDate,minIncrement,currentPrice,initialPrice,secretMin)values 
-("user1", "08:00:00","2021-04-23","09:00:00","2021-04-26", 1.0, 5.0, 5.0, 10.0),
-("user2", "09:00:00",CURDATE(),"09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0),
-("user1", "20:00:00",CURDATE(), "09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0);
+-- Dump completed on 2021-04-24 19:43:11
