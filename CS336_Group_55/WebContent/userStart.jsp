@@ -37,7 +37,17 @@
 				<button onclick="window.location='showCPU.jsp';"> CPU </button>
 				<button onclick="window.location='showGPU.jsp';"> GPU </button>
 				<button onclick="window.location='showHDD.jsp';"> Hard Drive </button>
-	<br>
+		<h1>Alerts</h1>
+			<h2>Type in username</h2>
+				<form method="get" action="bidAlert.jsp">
+					<table>
+						<tr>
+							<td> Username </td><td><input type="text" name="username"></td>
+						</tr>
+					</table>
+					<input type="submit" value="See Alerts">
+				</form>
+		<br>
 
 </body>
 </html>
