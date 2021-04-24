@@ -25,23 +25,12 @@
 
  --%>
 <body>
-	<br>
-		<form method="get" action="newListing.jsp">
-			<table>
-				<tr>    
-					<td>start date</td><td><input type="date" name="startDate" placeholder = "YYYY-MM-DD"></td>
-				</tr>
-				<tr>
-					<td>start time</td><td><input type="time" name="startTime" placeholder = "HH:MM:SS"></td>
-				</tr>
-				<tr>
-					<td>name item</td><td><input type="text" name="nameItem" placeholder = "ex: drugs"></td>
-				</tr>
-				<tr>
-					<td>starting price</td><td><input type="number" step="0.01" name="currentPrice" placeholder = "10.01"></td>
-				</tr>			</table>
-			<input type="submit" value="newListing">
-		</form>
+	<br>	
+		<h1>Create New Listing</h1>
+			<h2>Select which item type to create</h2>
+				<button onclick="window.location='CPUForm.jsp';"> CPU </button>
+				<button onclick="window.location='GPUForm.jsp';"> GPU </button>
+				<button onclick="window.location='HDDForm.jsp';"> Hard Drive </button>
 	<br>
 
 </body>
