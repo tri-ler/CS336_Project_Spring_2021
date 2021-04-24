@@ -3,6 +3,8 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="java.time.LocalDateTime"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.time.format.DateTimeFormatter"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,23 +49,9 @@
 				<td>start date</td>
 				<td>start time</td>
 				<td>min increment</td>
-				<td>current price</td>				
-				<td>bid</td>				
+				<td>current price</td>							
 			</tr>
 			<%
-			// set up date variables
-			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = sdformat.parse("2019-04-15");
-			Date d2 = sdformat.parse("2019-08-10");
-			System.out.println("The date 1 is: " + sdformat.format(d1));
-			System.out.println("The date 2 is: " + sdformat.format(d2));
-			if(d1.compareTo(d2) > 0) {
-			   System.out.println("Date 1 occurs after Date 2");
-			} else if(d1.compareTo(d2) < 0) {
-			   System.out.println("Date 1 occurs before Date 2");
-			} else if(d1.compareTo(d2) == 0) {
-			   System.out.println("Both dates are equal");
-			}
 			//parse out the results
 			while (result.next()) { %>
 				<tr>    
@@ -73,7 +61,6 @@
 					<td><%= result.getString("startTime") %></td>
 					<td><%= result.getString("minIncrement") %></td>
 					<td><%= result.getString("currentPrice") %></td>
-					<td><%= if	 %></td>
 					<!--
 					don't include innitialPrice or secretMin  -->
 				</tr>
