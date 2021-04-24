@@ -44,10 +44,13 @@ CREATE TABLE `auction`(
 	`auctionID` int NOT NULL auto_increment,
     `seller` varchar(45) NOT NULL,
     `startTime` time NOT NULL,
-    `startDate` date NOT NULL,
+    `startDate` date NOT NULL,    
+    `endTime` time NOT NULL,
+    `endDate` date NOT NULL,
     `minIncrement` float NOT NULL,
     `currentPrice` float NOT NULL,
     `initialPrice` float NOT NULL,
+    `winner` varchar(45),
     `secretMin` float NOT NULL,
     PRIMARY KEY (`auctionID`)
     );
@@ -67,6 +70,7 @@ CREATE TABLE `bids` (
   `time` time DEFAULT NULL,
   `bidAmount` float DEFAULT NULL,
   `username` varchar(45) NOT NULL,
+  `isAuto` boolean NOT NULL,
   PRIMARY KEY (`bidID`),
   FOREIGN KEY (`username`) references users(`username`),
   FOREIGN KEY (`auctionID`) references auction(`auctionID`)
@@ -169,3 +173,10 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-04-13 11:42:08
+
+use cs336project;
+
+insert into auction (seller, startTime,startDate,endTime,endDate,minIncrement,currentPrice,initialPrice,secretMin)values 
+("user1", "08:00:00","2021-04-23","09:00:00","2021-04-26", 1.0, 5.0, 5.0, 10.0),
+("user2", "09:00:00",CURDATE(),"09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0),
+("user1", "20:00:00",CURDATE(), "09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0);
