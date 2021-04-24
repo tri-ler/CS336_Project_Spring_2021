@@ -99,7 +99,7 @@ CREATE TABLE `CPU`(
     `itemID` int NOT NULL,
     `brand` varchar(45) NOT NULL,
     `model` varchar(45) NOT NULL,
-    `color` varchar(45) NOT NULL,
+    `socket` varchar(45) NOT NULL,
     `frequency` varchar(45) NOT NULL,
     PRIMARY KEY (`itemID`),
     FOREIGN KEY (`itemID`) REFERENCES computerPart(itemID)
