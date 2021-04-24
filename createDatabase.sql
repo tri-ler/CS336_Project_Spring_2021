@@ -35,13 +35,13 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('',''),('user1','user1');
+INSERT INTO `users` VALUES ('user1','user1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auction`;
 CREATE TABLE `auction`(
-	`auctionID` int NOT NULL,
+	`auctionID` int NOT NULL auto_increment,
     `seller` varchar(45) NOT NULL,
     `startTime` time NOT NULL,
     `startDate` date NOT NULL,
@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `bids`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bids` (
-  `bidID` int NOT NULL,
+  `bidID` int NOT NULL auto_increment, 
   `auctionID` int NOT NULL,
   `seller` varchar(45) NOT NULL,
   `date` date DEFAULT NULL, 
@@ -90,7 +90,7 @@ CREATE TABLE `auctioning`(
 DROP TABLE IF EXISTS `computerPart`;
 CREATE TABLE `computerPart`(
 	`partName` varchar(45) NOT NULL,
-    `itemID` int NOT NULL,
+    `itemID` int NOT NULL auto_increment,
     PRIMARY KEY (`itemID`)
     )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
