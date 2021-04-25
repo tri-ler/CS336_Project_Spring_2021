@@ -273,4 +273,29 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+--
+-- Table structure for table `q&a`
+--
+
+DROP TABLE IF EXISTS `q&a`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `q&a` (
+  `qID` int NOT NULL AUTO_INCREMENT,
+  `question` varchar(255) DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`qID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `q&a`
+--
+
+LOCK TABLES `q&a` WRITE;
+/*!40000 ALTER TABLE `q&a` DISABLE KEYS */;
+INSERT INTO `q&a` VALUES (1,'How long will my item take to ship?','2-3 Business Days');
+/*!40000 ALTER TABLE `q&a` ENABLE KEYS */;
+UNLOCK TABLES;
+
 -- Dump completed on 2021-04-24 22:21:08
