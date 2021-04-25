@@ -51,10 +51,13 @@
 				<button onclick="window.location='showGPU.jsp';"> GPU </button>
 				<button onclick="window.location='showHDD.jsp';"> Hard Drive </button>
 		<h1>Total Earnings</h1>
-				<button onclick="window.location='earnings.jsp':"> Show earnings </button>
+				<button onclick="window.location='earnings.jsp';"> Show Earnings </button>
 		<h1>Show Bids</h1>
+			<button onclick="window.location='repBids.jsp';"> Show Bids </button>
 		<h1>Show Auctions</h1>
+			<button onclick="window.location='repAuctions.jsp';"> Show Auctions </button>
 		<h1>Show Questions</h1>
+			<button onclick="window.location='repQuestions.jsp';"> Show Questions </button>
 	<br>
 
 </body>

@@ -50,6 +50,7 @@
 		<h1>Completed Listings</h1>
 			<button onclick="window.location='completedListings.jsp';"> Show completed listings </button>
 		<br>
-
+		<h1>Ask a Question</h1>
+			<button onclick = "window.location='questions.jsp';"> Show questions </button>
 </body>
 </html>
