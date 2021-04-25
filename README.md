@@ -2,6 +2,7 @@
 CS 336 - Principles of Information and Data Management Final Project
 
 # For Submission
+- TianYu Chen had a surgery and were unable to maintain contact with him. He was assigned the "Browsing and advanced search functionality" porition of the project
 - Five users will pre-created, do not create a user with the same username
   - |Username|Password|
     ---|---|
