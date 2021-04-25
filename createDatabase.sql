@@ -272,12 +272,3 @@ UNLOCK TABLES;
 
 
 -- Dump completed on 2021-04-13 11:42:08
-
-use cs336project;
-
-insert into auction (seller, startTime,startDate,endTime,endDate,minIncrement,currentPrice,initialPrice,secretMin)values 
-("user1", "08:00:00","2021-04-23","09:00:00","2021-04-26", 1.0, 5.0, 5.0, 10.0),
-("user2", "09:00:00",CURDATE(),"09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0),
-("user2", "09:00:00",CURDATE(),CURTIME(), "2021-04-26", 1.0, 5.0, 5.0, 10.0),
-("user1", "20:00:00",CURDATE(), "09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0);
-
