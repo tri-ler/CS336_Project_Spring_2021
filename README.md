@@ -1,12 +1,26 @@
 # CS336_Project_Spring_2021
 CS 336 - Principles of Information and Data Management Final Project
 
+# For Submission
+- TianYu Chen had a surgery and were unable to maintain contact with him. He was assigned the "Browsing and advanced search functionality" porition of the project
+- Five users will pre-created, do not create a user with the same username
+  - |Username|Password|
+    ---|---|
+    |user1|user1|
+    |user2|user2|
+    |user3|user3|
+    |user4|user4|
+    |user5|user5|
+- Two customer representative login credentials will be created
+  - |Username|Password|
+    ---|---|
+    |admin|admin|
+    |rep1|rep1|
+    
 # How to work git and github
-- First time
-  - create file called `config` in same level as `ApplicationDB.java` so we can have different passwords
-    - right-click `com.cs336.pkg->New->Other->General->File`
-    - type `password=<your sql password> (ex: password)`
-    - type `username=<your sql username> (ex: root)`
+- Setup Database connection
+  - `Java Resources -> src ->com.cs336pkg -> ApplicationDB.java
+  - `line 15` and `line 16` update with your username and password
 - ALWAYS DO THESE WHENEVER YOU START WORKING
   - open a terminal (ex: right-click `CS336_Group_55`and click `Show in Local Terminal`)
   - `git checkout main`
@@ -41,12 +55,6 @@ CS 336 - Principles of Information and Data Management Final Project
 - May have to re-add Tomcat Server `Window -> Preferences -> Server -> Runtime Enviroment -> Add...`
 - Right Click `CS336_Group_55` `Run As -> Run On Server -> Finish`
 
-# Notes
-- No login credentials will be created for normal users
-- Two customer representative login credentials will be created
-  - |Username|Password|
-    ---|---|
-    |admin|admin|
-    |rep1|rep1|
+
 
   
