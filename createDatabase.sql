@@ -157,7 +157,7 @@ CREATE TABLE `cpu` (
 
 LOCK TABLES `cpu` WRITE;
 /*!40000 ALTER TABLE `cpu` DISABLE KEYS */;
-INSERT INTO `cpu` VALUES (1,'intel','i7-6700','LGA2011','3.4 GHz'),(2,'amd','ryzen 3600','am4','4.0 GHz'),(3,'intel','i9-10900','LGA2011','5.0Ghz');
+INSERT INTO `cpu` VALUES (6,'intel','i7-6700','LGA2011','3.4 GHz'),(7,'amd','ryzen 3600','am4','4.0 GHz'),(8,'intel','i9-10900','LGA2011','5.0Ghz');
 /*!40000 ALTER TABLE `cpu` ENABLE KEYS */;
 UNLOCK TABLES;
 
