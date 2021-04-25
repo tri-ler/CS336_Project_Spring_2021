@@ -47,6 +47,8 @@
 					</table>
 					<input type="submit" value="See Alerts">
 				</form>
+		<h1>Completed Listings</h1>
+			<button onclick="window.location='completedListings.jsp';"> Show completed listings </button>
 		<br>
 
 </body>
