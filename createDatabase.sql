@@ -1,3 +1,5 @@
+USE cs336project;
+
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cs336project
@@ -118,7 +120,8 @@ DROP TABLE IF EXISTS `computerpart`;
 CREATE TABLE `computerpart` (
   `partName` varchar(45) NOT NULL,
   `itemID` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`itemID`)
+  `type` varchar(45) NOT NULL,
+  PRIMARY KEY (`itemID`, `type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,7 +131,7 @@ CREATE TABLE `computerpart` (
 
 LOCK TABLES `computerpart` WRITE;
 /*!40000 ALTER TABLE `computerpart` DISABLE KEYS */;
-INSERT INTO `computerpart` VALUES ('Intel i7-6700',6),('Amd Ryzen 3600',7),('Intel i9-10900',8),('AMD Ryzen 5950',9),('Intel i3-9100',10);
+INSERT INTO `computerpart` VALUES ('Intel i7-6700',6,'CPU'),('Amd Ryzen 3600',7,'CPU'),('Intel i9-10900',8,'CPU'),('AMD Ryzen 5950',9,'CPU'),('Intel i3-9100',10,'CPU');
 /*!40000 ALTER TABLE `computerpart` ENABLE KEYS */;
 UNLOCK TABLES;
 
