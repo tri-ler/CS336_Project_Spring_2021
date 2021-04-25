@@ -85,8 +85,7 @@ DROP TABLE IF EXISTS `bids`;
 CREATE TABLE `bids` (
   `bidID` int NOT NULL AUTO_INCREMENT,
   `auctionID` int NOT NULL,
-  `seller` varchar(45) NOT NULL,
-  `date` date DEFAULT NULL,
+  `date` date DEFAULT NULL, 
   `time` time DEFAULT NULL,
   `bidAmount` float DEFAULT NULL,
   `username` varchar(45) NOT NULL,
@@ -271,4 +270,14 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-24 19:43:11
+
+-- Dump completed on 2021-04-13 11:42:08
+
+use cs336project;
+
+insert into auction (seller, startTime,startDate,endTime,endDate,minIncrement,currentPrice,initialPrice,secretMin)values 
+("user1", "08:00:00","2021-04-23","09:00:00","2021-04-26", 1.0, 5.0, 5.0, 10.0),
+("user2", "09:00:00",CURDATE(),"09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0),
+("user2", "09:00:00",CURDATE(),CURTIME(), "2021-04-26", 1.0, 5.0, 5.0, 10.0),
+("user1", "20:00:00",CURDATE(), "09:00:00", "2021-04-26", 1.0, 5.0, 5.0, 10.0);
+
