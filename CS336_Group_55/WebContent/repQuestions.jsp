@@ -50,7 +50,7 @@
 			<% }
 			
 			%>
-			<form method="get" action="askQuestion.jsp">
+			<form method="get" action="repPostQuestion.jsp">
 				<table>
 					<tr>    
 						<td>Type Question</td><td><input type="text" name="question"></td>
@@ -71,6 +71,7 @@
 				</table>
 				<input type="submit" value="Post Answer">
 			</form>
+			<button onclick="window.location='repStart.jsp';"> Return </button>
 			<%
 			
 			//close the connection.
