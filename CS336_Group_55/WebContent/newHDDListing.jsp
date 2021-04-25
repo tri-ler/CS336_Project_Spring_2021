@@ -31,8 +31,8 @@
 		String nameItem = request.getParameter("nameItem");
 		String brand = request.getParameter("brand");
 		String model = request.getParameter("model");
-		String socket = request.getParameter("socket");
-		String frequency = request.getParameter("frequency");
+		String color = request.getParameter("color");
+		String capacity = request.getParameter("capacity");
 		String seller = request.getParameter("seller");
 		String increment = request.getParameter("minIncrement");
 		String initialPrice = request.getParameter("initialPrice");
@@ -42,7 +42,7 @@
 		String insert = "INSERT INTO computerPart(partName,type)" + "VALUES (?,?)";
 		PreparedStatement ps = con.prepareStatement(insert);
 		ps.setString(1, nameItem);
-		ps.setString(2, "CPU");
+		ps.setString(2, "HDD");
 		ps.executeUpdate();
 		
 		
@@ -62,14 +62,14 @@
 		result.next();
 		String itemID = result.getString("last_insert_id()");
 		
-		//Insert Value into CPU
-		insert = "INSERT INTO cpu(itemID,brand,model,socket,frequency)" + "VALUES (?,?,?,?,?)";
+		//Insert Value into graphicscard
+		insert = "INSERT INTO harddrive(itemID,brand,model,color,capacity)" + "VALUES (?,?,?,?,?)";
 		ps = con.prepareStatement(insert);
 		ps.setString(1, itemID);
 		ps.setString(2, brand);
 		ps.setString(3, model);
-		ps.setString(4, socket);
-		ps.setString(5, frequency);
+		ps.setString(4, color);
+		ps.setString(5, capacity);
 		ps.executeUpdate();
 		
 		//Insert Value in to Auction

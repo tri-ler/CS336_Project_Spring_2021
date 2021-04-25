@@ -11,43 +11,47 @@
 		<form method="get" action="newCPUListing.jsp">
 			<table>
 				<tr>    
-					<td>start date</td><td><input type="date" name="startDate" placeholder = "YYYY-MM-DD"></td>
+					<td>Start Date</td><td><input type="date" name="startDate" placeholder = "YYYY-MM-DD"></td>
 				</tr>
 				<tr>
-					<td>start time</td><td><input type="time" name="startTime" placeholder = "HH:MM:SS"></td>
+					<td>Start Time</td><td><input type="time" name="startTime" placeholder = "HH:MM:SS"></td>
 				</tr>
 				<tr>
-					<td>name item</td><td><input type="text" name="nameItem" placeholder = "ex: Intel i7-6700"></td>
+					<td>End Date</td><td><input type="date" name="endDate" placeholder = "YYYY-MM-DD"></td>
 				</tr>
 				<tr>
-					<td>starting price</td><td><input type="number" step="0.01" name="currentPrice" placeholder = "10.01"></td>
+					<td>End Time</td><td><input type="time" name="endTime" placeholder = "HH:MM:SS"></td>
 				</tr>
 				<tr>
-					<td>brand</td><td><input type="text" name="brand" placeholder = "intel"></td>
+					<td>Listing Title</td><td><input type="text" name="nameItem" placeholder = "ex: Intel i7-6700"></td>
+				</tr>
+				<tr>
+					<td>Brand</td><td><input type="text" name="brand" placeholder = "ex: Intel"></td>
 				</tr>	
 				<tr>
-					<td>model</td><td><input type="text" name="model" placeholder = "i7-6700"></td>
+					<td>Model</td><td><input type="text" name="model" placeholder = "ex: i7-6700"></td>
 				</tr>
 				<tr>
-					<td>socket</td><td><input type="text" name="socket" placeholder = "LGA2011"></td>
+					<td>Socket</td><td><input type="text" name="socket" placeholder = "ex: LGA2011"></td>
 				</tr>
 				<tr>
-					<td>frequency</td><td><input type="text" name="frequency" placeholder = "3.4Ghz"></td>
+					<td>Frequency</td><td><input type="text" name="frequency" placeholder = "ex: 3.4Ghz"></td>
 				</tr>
 				<tr>
-					<td>seller username</td><td><input type="text" name="seller" placeholder = "user1"></td>
+					<td>Seller Username</td><td><input type="text" name="seller" placeholder = "ex: user1"></td>
 				</tr>
 				<tr>
-					<td>minimum increment</td><td><input type="text" name="minIncrement" placeholder = "1"></td>
+					<td>Minimum Increment</td><td><input type="text" name="minIncrement" placeholder = "ex: 1"></td>
 				</tr>
 				<tr>
-					<td>starting price</td><td><input type="text" name="initialPrice" placeholder = "5"></td>
+					<td>Starting Price</td><td><input type="text" name="initialPrice" placeholder = "ex: 5"></td>
 				</tr>	
 				<tr>
-					<td>reserve</td><td><input type="text" name="reserve" placeholder = "10"></td>
+					<td>Reserve</td><td><input type="text" name="reserve" placeholder = "ex: 10"></td>
 				</tr>		
 			</table>
 			<input type="submit" value="Create New CPU Listing">
 		</form>
+		<button onclick="window.location='userStart.jsp';"> Return </button>
 </body>
 </html>

@@ -5,7 +5,6 @@
 <%@ page import="java.time.LocalDateTime"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
-<%@ page import="java.text.SimpleDateFormat"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,27 +15,20 @@
 	<body>
 		<% try {
 	
-			//Get values from the form
-			String username = request.getParameter("username");
 			//Get the database connection
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();		
+
+			//Create a SQL statement
+			Statement stmt = con.createStatement();
 			
 			//Nothing to get
 			
 			//Make a SELECT query from the auction table 
-			String str = "SELECT auction.auctionID, computerpart.partName, auction.startDate, auction.startTime, auction.endDate, auction.endTime, auction.currentPrice, auction.secretMin, IF(bids.auctionID = t1.auctionID AND bids.username = t1.username, true, false) AS isWinning " 
-			+ "FROM auction, auctioning, computerpart, bids, (SELECT auctionID, username, max(bidAmount) FROM bids GROUP BY auctionID) t1 "
-			+ "WHERE auction.auctionID = auctioning.auctionID AND computerpart.itemID = auctioning.itemID AND auction.auctionID = bids.auctionID AND t1.auctionID = bids.auctionID AND bids.username = ?";
-			
-			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-			PreparedStatement ps = con.prepareStatement(str);
-			
-			//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-			ps.setString(1, username);
+			String str = "SELECT * FROM auction";
 			
 			//Run the query against the database.
-			ResultSet result = ps.executeQuery();
+			ResultSet result = stmt.executeQuery(str);
 		%>
 			
 		<!--  Make an HTML table to show the results in: -->
@@ -52,34 +44,44 @@
 			</td>
 		</tr> --%>
 			<tr>
-				<td> auction ID |</td>
-				<td> partName |</td>
-				<td> start date |</td>
-				<td> start time |</td>
-				<td> end date |</td>
-				<td> end time |</td>
-				<td> current price |</td>
-				<td> reserve |</td>
-				<td> Winning?</td>							
+				<td>auction ID</td>
+				<td>seller name</td>
+				<td>start date</td>
+				<td>start time</td>
+				<td>min increment</td>
+				<td>current price</td>							
 			</tr>
 			<%
 			//parse out the results
 			while (result.next()) { %>
 				<tr>    
 					<td><%= result.getString("auctionID") %></td>
-					<td><%= result.getString("partName") %></td>
+					<td><%= result.getString("seller") %></td>
 					<td><%= result.getString("startDate") %></td>
 					<td><%= result.getString("startTime") %></td>
-					<td><%= result.getString("endDate") %></td>
-					<td><%= result.getString("endTime") %></td>
+					<td><%= result.getString("minIncrement") %></td>
 					<td><%= result.getString("currentPrice") %></td>
-					<td><%= result.getString("isWinning") %></td>
 					<!--
 					don't include innitialPrice or secretMin  -->
 				</tr>
 				
-
-			<% }
+			<% }%>
+			<form method="get" action="bid.jsp">
+				<table>
+					<tr>    
+						<td>auction id</td><td><input type="text" name="auctionID"></td>
+					</tr>
+					<tr>
+						<td>username</td><td><input type="text" name="username"></td>
+					</tr>
+					<tr>
+						<td>newBid</td><td><input type="number" step=0.01 name="newBid"></td>
+					</tr>
+				</table>
+				<input type="submit" value="Bid!">
+			</form>
+			
+			<%
 			//close the connection.
 			db.closeConnection(con);
 			%>
