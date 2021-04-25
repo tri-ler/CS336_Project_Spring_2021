@@ -39,9 +39,10 @@
 		//System.out.println("startDate: " + startDate);
 		
 		//Insert Value into computerPart
-		String insert = "INSERT INTO computerPart(partName)" + "VALUES (?)";
+		String insert = "INSERT INTO computerPart(partName,type)" + "VALUES (?,?)";
 		PreparedStatement ps = con.prepareStatement(insert);
 		ps.setString(1, nameItem);
+		ps.setString(2, "CPU");
 		ps.executeUpdate();
 		
 		
