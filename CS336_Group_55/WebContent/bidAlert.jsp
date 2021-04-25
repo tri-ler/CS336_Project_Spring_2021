@@ -25,8 +25,8 @@
 			//Nothing to get
 			
 			//Make a SELECT query from the auction table 
-			String str = "SELECT auction.auctionID, computerpart.partName, auction.startDate, auction.startTime, auction.endDate, auction.endTime, auction.currentPrice, auction.secretMin, IF(bids.auctionID = t1.auctionID AND bids.username = t1.username, true, false) AS isWinning " 
-			+ "FROM auction, auctioning, computerpart, bids, (SELECT auctionID, username, max(bidAmount) FROM bids GROUP BY auctionID) t1 "
+			String str = "SELECT auction.auctionID, computerpart.partName, auction.startDate, auction.startTime, auction.endDate, auction.endTime, auction.currentPrice, IF(bids.auctionID = t1.auctionID AND bids.username = t1.username, true, false) AS isWinning " 
+			+ "FROM auction, auctioning, computerpart, bids, (SELECT bidID, auctionID, username, bidAmount FROM bids WHERE (auctionID, bidAmount) IN (select AuctionID, max(bidAmount) FROM bids GROUP BY auctionID)) t1 "
 			+ "WHERE auction.auctionID = auctioning.auctionID AND computerpart.itemID = auctioning.itemID AND auction.auctionID = bids.auctionID AND t1.auctionID = bids.auctionID AND bids.username = ?";
 			
 			//Create a Prepared SQL statement allowing you to introduce the parameters of the query
@@ -59,7 +59,6 @@
 				<td> end date |</td>
 				<td> end time |</td>
 				<td> current price |</td>
-				<td> reserve |</td>
 				<td> Winning?</td>							
 			</tr>
 			<%
