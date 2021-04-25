@@ -3,7 +3,7 @@ CS 336 - Principles of Information and Data Management Final Project
 
 # For Submission
 - Five users will pre-created, do not create a user with the same username
-  -   |Username|Password|
+  - |Username|Password|
     ---|---|
     |user1|user1|
     |user2|user2|
