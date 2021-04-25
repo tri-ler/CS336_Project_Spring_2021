@@ -50,8 +50,8 @@
 		Date currDate = sdformat.parse(dtf.format(now));
 		Date currTime = sdformat2.parse(dtf2.format(now));
 		
-		System.out.println("The date is: " + sdformat.format(currDate));
-		System.out.println("The time is: " + sdformat2.format(currTime));
+		//System.out.println("The date is: " + sdformat.format(currDate));
+		//System.out.println("The time is: " + sdformat2.format(currTime));
 		//Run the query against the DB
 		//==============================================================================================
 
@@ -61,6 +61,7 @@
 		String endDate = result.getString("endDate");
 		String minIncrement = (result.getString("minIncrement"));
 		String currentPrice = (result.getString("currentPrice"));
+		System.out.println("currentPrice: "+ currentPrice);
 
 		// convert database results to dates
 
@@ -68,7 +69,7 @@
 		Date eDate = sdformat.parse(endDate);
 		Date sTime = sdformat2.parse(startTime);
 		Date eTime = sdformat2.parse(endTime);
-		
+		System.out.println("newBid: " + newBid);
 		float cp = Float.parseFloat(currentPrice);
 		if ((currDate.compareTo(sDate) > 0 && currDate.compareTo(eDate) < 0 || // check if within time and > cp
 				currDate.compareTo(sDate) == 0 && currTime.compareTo(sTime)>0 ||
@@ -94,12 +95,11 @@
 				ps.setString(6, username);
 				ps.executeUpdate(); 
 				
-				
 				String newAutoBid;
 				PreparedStatement autoPS;// = con.prepareStatement(newAutoBid);
 				
 				// 
-				String secondHighestBid = "SELECT username, ifnull(MAX(bidAmount),0) as bidA FROM bids WHERE auctionID = ? AND bidAmount < (SELECT MAX(bidAmount) FROM bids WHERE auctionID = ? and isAuto = True )";
+				String secondHighestBid = "SELECT username, ifnull(MAX(bidAmount),0) as bidA FROM bids WHERE auctionID = ? AND isAuto = True AND bidAmount < (SELECT MAX(bidAmount) FROM bids WHERE auctionID = ? and isAuto = True )";
 				PreparedStatement secondHighestBidPS = con.prepareStatement(secondHighestBid); 
 				secondHighestBidPS.setString(1,auctionID);
 				secondHighestBidPS.setString(2,auctionID);
@@ -111,7 +111,7 @@
 				System.out.println(secondHighestAutoBidAmount);
 				System.out.println(nameOfUser + "\n\n\n");
 				
-				while((Float.parseFloat(newBidAmount)<secondHighestAutoBidAmount+Float.parseFloat(minIncrement)) && secondHighestAutoBidAmount != 0){
+				while((Float.parseFloat(newBidAmount)<=secondHighestAutoBidAmount) && secondHighestAutoBidAmount != 0){
 					newBidAmount = String.valueOf(Float.parseFloat(newBidAmount)+Float.parseFloat(minIncrement));		
 					System.out.println("newBidAmount: " + newBidAmount);
 					newAutoBid = "INSERT INTO bids (auctionID, date, time, bidAmount, username, isAuto)"+"VALUES (?,curdate(),curtime(),?,?,False)";
@@ -130,30 +130,7 @@
 				newPricePS.setString(1, newBidAmount);
 				newPricePS.setString(2, auctionID);
 				newPricePS.executeUpdate();
-				/*				
-				String countBids = "select count(*) from bids where auctionID = ?";
-				PreparedStatement countBidsps = con.prepareStatement(countBids);
-				countBidsps.setString(1,auctionID);
-				ResultSet countBidsResult = countBidsps.executeQuery();
-				countBidsResult.next();
-				if(Float.parseFloat(countBidsResult.getString("count(*)"))>1){// get 2nd highest
- 					String secondHighestBid = "SELECT MAX(bidAmount) FROM bids WHERE auctionID = ? AND bidAmount < (SELECT MAX(bidAmount) FROM bids WHERE auctionID = ? )";
-					PreparedStatement secondHighestBidPS = con.prepareStatement(secondHighestBid); 
-					secondHighestBidPS.setString(1,auctionID);
-					secondHighestBidPS.setString(2,auctionID);
-					ResultSet secondHighestBidResult = secondHighestBidPS.executeQuery();
-					secondHighestBidResult.next();
-					float newCurrentPrice = Float.parseFloat(secondHighestBidResult.getString("MAX(bidAmount)"))+Float.parseFloat(minIncrement);
-										
-					String newPrice = "update auction " + 
-							"set currentPrice = ? "+
-							"where auctionID = ?";
-					PreparedStatement newPricePS = con.prepareStatement(newPrice);
-					newPricePS.setString(1, String.valueOf(newCurrentPrice));
-					newPricePS.setString(2, auctionID);
-					newPricePS.executeUpdate();
-				} 
-				*/
+
 			}else{
 				insertBid = "INSERT INTO bids (auctionID, date, time, bidAmount, username, isAuto)"+"VALUES (?,curdate(),curtime(),?,?,False)";
 				//Create a Prepared SQL statement allowing you to introduce the parameters of the query
@@ -162,6 +139,16 @@
 				ps.setString(2, newBid);
 				ps.setString(3, username);
 				ps.executeUpdate();
+				
+				//check if there's a higher autobid
+				String checkAutoBid = "SELECT ifnull(MAX(bidAmount),-1) as autoBid FROM bids WHERE auctionID = ? and isAuto = True ";
+				PreparedStatement checkAutoBidps = con.prepareStatement(checkAutoBid); 
+				checkAutoBidps.setString(1,auctionID);
+				ResultSet checkAutoBidResult = checkAutoBidps.executeQuery();
+				checkAutoBidResult.next();
+				if(Float.parseFloat(checkAutoBidResult.getString("autoBid"))>Float.parseFloat(newBid)){
+					newBid = String.valueOf(Float.parseFloat(newBid)+Float.parseFloat(minIncrement));
+				}
 				
 				String newPrice = "update auction " + 
 						"set currentPrice = ? "+
@@ -177,7 +164,7 @@
 			out.print("bid succeeded!");
 			response.sendRedirect("showAll.jsp");
 		}else{
-		    System.out.println("invalid timing OR price is < current price");
+		    System.out.println("invalid timing OR price is < current price, go back");
 		}
 		 	
 		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
