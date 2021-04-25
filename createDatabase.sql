@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `bids`;
 CREATE TABLE `bids` (
   `bidID` int NOT NULL AUTO_INCREMENT,
   `auctionID` int NOT NULL,
-  `date` date DEFAULT NULL, 
+  `date` date DEFAULT NULL,
   `time` time DEFAULT NULL,
   `bidAmount` float DEFAULT NULL,
   `username` varchar(45) NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE `bids` (
 
 LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` DISABLE KEYS */;
-INSERT INTO `bids` VALUES (1,1,'user1','2021-04-24','01:00:00',10,'user5',0),(2,2,'user2','2021-04-24','02:00:00',10,'user4',0),(3,3,'user3','2021-04-24','03:00:00',10,'user3',0),(4,4,'user4','2021-04-24','04:00:00',1,'user2',0),(5,5,'user5','2021-04-24','05:00:00',10,'user1',0),(6,5,'user5','2021-04-24','06:00:00',15,'user2',0),(7,4,'user4','2021-04-24','07:00:00',15,'user3',0),(8,3,'user3','2021-04-24','08:00:00',15,'user4',0),(9,2,'user2','2021-04-24','09:00:00',20,'user5',0),(10,1,'user1','2021-04-24','10:00:00',30,'user1',0);
+INSERT INTO `bids` VALUES (1,1,'2021-04-24','01:00:00',10,'user5',0),(2,2,'2021-04-24','02:00:00',10,'user4',0),(3,3,'2021-04-24','03:00:00',10,'user3',0),(4,4,'2021-04-24','04:00:00',1,'user2',0),(5,5,'2021-04-24','05:00:00',10,'user1',0),(6,5,'2021-04-24','06:00:00',15,'user2',0),(7,4,'2021-04-24','07:00:00',15,'user3',0),(8,3,'2021-04-24','08:00:00',15,'user4',0),(9,2,'2021-04-24','09:00:00',20,'user5',0),(10,1,'2021-04-24','10:00:00',30,'user1',0);
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +119,7 @@ CREATE TABLE `computerpart` (
   `partName` varchar(45) NOT NULL,
   `itemID` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`itemID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `computerpart` (
 
 LOCK TABLES `computerpart` WRITE;
 /*!40000 ALTER TABLE `computerpart` DISABLE KEYS */;
-INSERT INTO `computerpart` VALUES ('Intel i7-6700',1),('Amd Ryzen 3600',2),('Intel i9-10900',3);
+INSERT INTO `computerpart` VALUES ('Intel i7-6700',6),('Amd Ryzen 3600',7),('Intel i9-10900',8),('AMD Ryzen 5950',9),('Intel i3-9100',10);
 /*!40000 ALTER TABLE `computerpart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `cpu` (
 
 LOCK TABLES `cpu` WRITE;
 /*!40000 ALTER TABLE `cpu` DISABLE KEYS */;
-INSERT INTO `cpu` VALUES (6,'intel','i7-6700','LGA2011','3.4 GHz'),(7,'amd','ryzen 3600','am4','4.0 GHz'),(8,'intel','i9-10900','LGA2011','5.0Ghz');
+INSERT INTO `cpu` VALUES (6,'intel','i7-6700','LGA2011','3.4 GHz'),(7,'amd','ryzen 3600','am4','4.0 GHz'),(8,'intel','i9-10900','LGA2011','5.0Ghz'),(9,'amd','ryzen 5950','am4','4.8 Ghz'),(10,'intel','','LGA2011','2.4 GHz');
 /*!40000 ALTER TABLE `cpu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,5 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-
--- Dump completed on 2021-04-13 11:42:08
+-- Dump completed on 2021-04-24 22:21:08
