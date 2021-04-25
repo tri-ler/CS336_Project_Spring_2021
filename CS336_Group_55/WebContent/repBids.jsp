@@ -61,6 +61,7 @@
 					</table>
 					<input type="submit" value="Delete Bid">
 				</form>
+				<button onclick="window.location='repStart.jsp';"> Return </button>
 			<%
 			
 			//close the connection.

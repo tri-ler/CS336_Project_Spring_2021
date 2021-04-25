@@ -24,14 +24,12 @@
 		Statement stmt = con.createStatement();
 		
 		//Get parameters from the HTML form at the HelloWorld.jsp
-		String qID = request.getParameter("qID");
-		String answer = request.getParameter("answer");
+		String question = request.getParameter("question");
 		
-		String insert = "UPDATE `q&a` SET `answer` = ? WHERE (`qID` = ?);";
+		String insert = "INSERT INTO `q&a`(question) VALUES(?)";
 		
 		PreparedStatement ps = con.prepareStatement(insert);
-		ps.setString(1, answer);
-		ps.setString(2, qID);
+		ps.setString(1, question);
 		ps.executeUpdate();
 		con.close();
 		response.sendRedirect("repQuestions.jsp");
