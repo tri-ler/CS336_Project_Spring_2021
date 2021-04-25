@@ -85,8 +85,7 @@ DROP TABLE IF EXISTS `bids`;
 CREATE TABLE `bids` (
   `bidID` int NOT NULL AUTO_INCREMENT,
   `auctionID` int NOT NULL,
-  `seller` varchar(45) NOT NULL,
-  `date` date DEFAULT NULL,
+  `date` date DEFAULT NULL, 
   `time` time DEFAULT NULL,
   `bidAmount` float DEFAULT NULL,
   `username` varchar(45) NOT NULL,
@@ -271,4 +270,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-24 19:43:11
+
+-- Dump completed on 2021-04-13 11:42:08

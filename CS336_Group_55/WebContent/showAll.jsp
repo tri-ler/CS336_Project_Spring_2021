@@ -65,8 +65,23 @@
 					don't include innitialPrice or secretMin  -->
 				</tr>
 				
-
-			<% }
+			<% }%>
+			<form method="get" action="bid.jsp">
+				<table>
+					<tr>    
+						<td>auction id</td><td><input type="text" name="auctionID"></td>
+					</tr>
+					<tr>
+						<td>username</td><td><input type="text" name="username"></td>
+					</tr>
+					<tr>
+						<td>newBid</td><td><input type="number" step=0.01 name="newBid"></td>
+					</tr>
+				</table>
+				<input type="submit" value="Bid!">
+			</form>
+			
+			<%
 			//close the connection.
 			db.closeConnection(con);
 			%>
