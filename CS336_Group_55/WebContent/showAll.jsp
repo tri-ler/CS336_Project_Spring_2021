@@ -77,6 +77,12 @@
 					<tr>
 						<td>newBid</td><td><input type="number" step=0.01 name="newBid"></td>
 					</tr>
+					<tr>
+						<td>Is this an autobid?</td><td><input type="radio" name="command" value="True"></td>
+					</tr>
+					<tr>
+						<td>Is this NOT an autobid?</td><td><input type="radio" name="command" value="False"></td>
+					</tr>
 				</table>
 				<input type="submit" value="Bid!">
 			</form>
