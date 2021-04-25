@@ -62,7 +62,7 @@ CREATE TABLE `auctioning` (
   `auctionID` int NOT NULL,
   PRIMARY KEY (`auctionID`,`itemID`),
   KEY `itemID` (`itemID`),
-  CONSTRAINT `auctioning_ibfk_1` FOREIGN KEY (`auctionID`) REFERENCES `auction` (`auctionID`),
+  CONSTRAINT `auctioning_ibfk_1` FOREIGN KEY (`auctionID`) REFERENCES `auction` (`auctionID`) ON DELETE CASCADE,
   CONSTRAINT `auctioning_ibfk_2` FOREIGN KEY (`itemID`) REFERENCES `computerpart` (`itemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -96,7 +96,7 @@ CREATE TABLE `bids` (
   KEY `username` (`username`),
   KEY `auctionID` (`auctionID`),
   CONSTRAINT `bids_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
-  CONSTRAINT `bids_ibfk_2` FOREIGN KEY (`auctionID`) REFERENCES `auction` (`auctionID`)
+  CONSTRAINT `bids_ibfk_2` FOREIGN KEY (`auctionID`) REFERENCES `auction` (`auctionID` ON DELETE CASCADE)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
