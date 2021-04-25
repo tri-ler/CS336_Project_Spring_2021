@@ -27,7 +27,7 @@
 			//Make a SELECT query from the auction table 
 			String str = "SELECT auction.auctionID, auction.endDate, auction.endTime, auction.currentPrice, IF(auction.secretMin <= t1.highestBid, t1.username, NULL) AS winner "
 			+ "FROM auction, (SELECT auctionID, username, max(bidAmount) AS highestBid FROM bids GROUP BY auctionID) t1 "
-			+ "WHERE auction.endDate < curdate() AND auction.endTime < curtime() AND auction.auctionID = t1.auctionID";
+			+ "WHERE auction.endDate <= curdate() AND auction.endTime < curtime() AND auction.auctionID = t1.auctionID";
 			
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);

@@ -11,19 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<%--
-- account stuff
-	- logout
-	- delete
-- buy/sell stuff
-	- show items
-	- search items
-	- bid items
-	- set alerts
-	- see bids
-	- create auction
 
- --%>
 <body>
 	<br>	
 		<h1>Create New Listing</h1>

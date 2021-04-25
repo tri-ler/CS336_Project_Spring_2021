@@ -25,7 +25,7 @@
 			//Nothing to get
 			
 			//Make a SELECT query from the auction table 
-			String str = "SELECT * FROM auction";
+			String str = "SELECT * FROM auction an, auctioning ag, computerpart cp WHERE an.auctionID = ag.auctionID and ag.itemID = cp.itemID";
 			
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
@@ -33,21 +33,15 @@
 			
 		<!--  Make an HTML table to show the results in: -->
 	<table>
-<%-- 		<tr>    
-			<td>Name</td>
-			<td>
-				<%if (entity.equals("beers"))
-					out.print("Manufacturer");
-				else
-					out.print("Address");
-				%>
-			</td>
-		</tr> --%>
+
 			<tr>
 				<td>auction ID</td>
 				<td>seller name</td>
+				<td>item name</td>
 				<td>start date</td>
 				<td>start time</td>
+				<td>end date</td>
+				<td>end time</td>
 				<td>min increment</td>
 				<td>current price</td>							
 			</tr>
@@ -55,12 +49,15 @@
 			//parse out the results
 			while (result.next()) { %>
 				<tr>    
-					<td><%= result.getString("auctionID") %></td>
-					<td><%= result.getString("seller") %></td>
-					<td><%= result.getString("startDate") %></td>
-					<td><%= result.getString("startTime") %></td>
-					<td><%= result.getString("minIncrement") %></td>
-					<td><%= result.getString("currentPrice") %></td>
+					<td><%= result.getString("an.auctionID") %></td>
+					<td><%= result.getString("an.seller") %></td>
+					<td><%= result.getString("cp.partName") %></td>
+					<td><%= result.getString("an.startDate") %></td>
+					<td><%= result.getString("an.startTime") %></td>
+					<td><%= result.getString("an.endDate") %></td>
+					<td><%= result.getString("an.endTime") %></td>
+					<td><%= result.getString("an.minIncrement") %></td>
+					<td><%= result.getString("an.currentPrice") %></td>
 					<!--
 					don't include innitialPrice or secretMin  -->
 				</tr>
