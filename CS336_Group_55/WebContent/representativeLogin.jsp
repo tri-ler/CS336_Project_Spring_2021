@@ -46,7 +46,7 @@
 			con.close();
 			ps.close();
 			out.print("Login successful");
-			response.sendRedirect("successfullLogin.jsp");
+			response.sendRedirect("repStart.jsp");
 		}else{
 			out.print(user.equals(username));
 			response.sendRedirect("failedLogin.jsp");
